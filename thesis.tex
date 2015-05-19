@@ -8,8 +8,14 @@
 \documentclass[oneref]{urithesis}
 \usepackage{amsmath,amsthm, amsfonts, amssymb, amsxtra,amsopn}
 \usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{ulem}
+\usepackage{cancel}
+\usepackage{xr}
 \usepackage{multirow}
+\usepackage{soul}
 \usepackage{algorithmic}
+\usepackage{textcomp}
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{listings}
@@ -19,6 +25,14 @@
 \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black,filecolor=black}
 \usepackage[T1]{fontenc}
 \usepackage[tableposition=top]{caption}
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{maroon}{RGB}{175,50,53}
+\externaldocument{chap3}
+\externaldocument{chap2}
+\externaldocument{chap4}
 % Top=1.25 inches - 0.05 inches for the header.
 %
 %\usepackage[total={6.0in, 8.5in}, 
@@ -26,6 +40,56 @@
 \usepackage[vmargin={1.25in, 1.25in}, hmargin={1.5in, 1in},
             textwidth=6in,
             textheight=5.25in]{geometry}
+            
+\lstdefinelanguage{JavaScript}{
+%
+    literate=*{0}{{\textcolor{blue}{0}}}{1}%
+         {1}{{\textcolor{blue}{1}}}{1}%
+         {2}{{\textcolor{blue}{2}}}{1}%
+         {3}{{\textcolor{blue}{3}}}{1}%
+         {4}{{\textcolor{blue}{4}}}{1}%
+         {5}{{\textcolor{blue}{5}}}{1}%
+         {6}{{\textcolor{blue}{6}}}{1}%
+         {7}{{\textcolor{blue}{7}}}{1}%
+         {8}{{\textcolor{blue}{8}}}{1}%
+         {9}{{\textcolor{blue}{9}}}{1}%
+         {.0}{{\textcolor{blue}{.0}}}{1}% Following is to ensure that only periods
+         {.1}{{\textcolor{blue}{.1}}}{1}% followed by a digit are changed.
+         {.2}{{\textcolor{blue}{.2}}}{1}%
+         {.3}{{\textcolor{blue}{.3}}}{1}%
+         {.4}{{\textcolor{blue}{.4}}}{1}%
+         {.5}{{\textcolor{blue}{.5}}}{1}%
+         {.6}{{\textcolor{blue}{.6}}}{1}%
+         {.7}{{\textcolor{blue}{.7}}}{1}%
+         {.8}{{\textcolor{blue}{.8}}}{1}%
+         {.9}{{\textcolor{blue}{.9}}}{1}%
+         {\ }{{ }}{1}% handle the space
+         ,%
+         mathescape=true,
+      morekeywords={break, case, catch, continue, debugger, default, delete,         do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with, def, script},
+      morecomment=[s]{/*}{*/},          
+      morecomment=[l]//,
+      morestring=[b]",
+      morestring=[b]',
+      literate= %
+          	      {°}{\textdegree{}}1%
+    }
+\lstset{frame=tb,
+  language=JavaScript,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{maroon},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
 
 % no limit on percentage of floats per page
 \renewcommand{\floatpagefraction}{1.0}
@@ -111,6 +175,10 @@
 \newchapter{chap1}
 \newchapter{chap2}
 \newchapter{chap3}
+\newchapter{chap4}
+\newchapter{chap5}
+\newchapter{chap6}
+\newchapter{chap7}
 
 %
 % ***** bibliography/references in file bib.tex

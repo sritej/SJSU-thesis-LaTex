@@ -1,174 +1,24 @@
-\chapter{The Basics}
-
-\LaTeX\ can be viewed
-as a compiled programming language, in contrast to that 
-nightmare known as Microsoft Word,
-which can be viewed as an interpreted language. So, to typeset a
-document in \LaTeX, you create a text file that has the {\tt .tex} extension.
-This file includes some special
-commands, known as macros. Then
-you compile your {\tt .tex} file by running  \LaTeX,
-which produces your typeset document, as a pdf. 
-
-In this paper, a few basics are discussed. There are plenty of good online resource
-if you need help with more advanced topics.
+\chapter{Introduction}
 
 
-\section{Typesetting Text} 
+JavaScript has become the most common web development language. Though once seen as a client side scripting language that only interacts with the user to control visual layout, today JavaScript is widely used to communicate asynchronously by sending and receiving data to and from the server thus giving web applications a much more interactive look. 
 
-To typeset text, you type whatever you want. Multiple spaces are
-ignored                           when typesetting, and
-the end of a line is treated as another space.
-Consequently, when you are typing, you can break lines anywhere, like here
-or here,
-since the lines are formatted automatically when you typeset the document.
-You start a new paragraph by leaving a blank line.
+Developers generally build or develop websites by grabbing JavaScript code-snippets from various sources.  This integration might be an intentional one or might be a result of some malicious code being inserted due to some security vulnerability. This act of injecting code from different untrusted zones into a website is generally referred to as cross-site scripting attack (XSS). There are chances that this code might still breach several security policies no matter if it has been included either knowingly or unknowingly. This malicious code operates with the same rights as that of the normal code developed and written by the web developer, thus leading to different security issues. 
 
-See how easy it is to start a new paragraph? A blank line does the trick.
+In this paper I worked on addressing one of such security issue which might leak some information to the attacker due to an unexpected error in the program's control flow.
 
 
-\section{Special Characters}
+\section{Security Challenges} 
 
-Typesetting text is generally pretty easy. However, there are some special
-characters that will not be typeset as you might expect. In the remainder of this
-section we consider some of the most common of these
-special characters. 
+There are a wide variety of security measures that have been implemented to safeguard against these problems. As the content is changing and is very dynamic in nature it has become very challenging to keep up with the best practices. One way is to build these security controls into the browser.
 
-The backslash ``\verb+\+'' is used 
-as the ``escape'' character, meaning that
-whatever follows a backslash is interpreted as a macro.
-For example, when \verb+\LaTeX+ is typeset, it looks like \LaTeX, which 
-is a lot different from LaTeX.
-
-To get double quotes, use two single quotes. That is, the left double quote is ``, while the right double
-quote is ''. When you do it correctly, quoted text looks ``like this.''
-If you use the double quote key, you will always get right-quotes, which looks "like this," and is
-almost certainly not what you want.
-
-A tilde ``\verb+~+'' is used as a ``tie,'' that is, a space is inserted, but no line break can occur.
-For example, you might type Dr.~Stamp just to be sure that the line of text
-does not break between Dr. and Stamp, as it otherwise might.
-
-The percent sign is used for comments---everything following a percent sign 
-on a given line is ignored when you \LaTeX\ your file. % Like this stuff here
-If you want a percent sign to appear in your document, use \verb+\%+, 
-which will give you this \%.
-
-The dollar sign also has special meaning, since it is used to start and end
-math formulas. To typeset a dollar sign, use \verb+\$+, like this~\$.
-
-To force \LaTeX\ to insert a space, use a backslash followed by
-a space, that is, \verb+\ +. You can put in multiple extra spaces\ \ \ \ \ \ \ if you want.
-
-\section{Fonts}
-
-To change fonts, enclose the text in curly brackets and give the appropriate font command.
-For example, to italicize text, {\it do this}, and to get boldface, {\bf this is the ticket}.
-Another useful font is {\tt this one}, which produces a typewriter-like font.
+One way to tackle such security issues is to include proper information flow analysis within the browser. Advantages of this approach being that the users are protected even when they visit websites with no server side security. Though this guarantees a systematic solution against proven security attacks, it has failed to achieve its purpose in many of the cases as they only concentrate on static information flow type systems. Here lies the challenge as JavaScript is dynamically typed, only dynamic information flow analysis is well suited to achieve protection against these malicious scripts.
 
 
-\section{Math Basics}
+\section{Dynamic Information Flow}
 
-Math typesetting is a big, big, big topic---here we just cover some of
-the most basic issues. For more information, look online.
+JavaScript is a dynamically typed language. It is used to embed within web pages and is executed by the browser.  It is now-a-days the most widely used programming language of all the current web 2.0 applications ~\cite{JavaScript}. It is generally used for client side validations, password fields check, major websites like search engines and mapping applications. JavaScript code from multiple sources executes with the same authority as that of an authorized user. To help address these sorts security issues, we investigate the methodology of tracking the data/information flow dynamically during runtime. There has been some amount of work done prior to this on type systems ~\cite{Javastatic1}, ~\cite{Javastatic3}, but most of them are not suitable to this kind of dynamic languages. Further, having just a static analysis approach can be problematic when used with in the browser.
 
-The dollar sign is used to start and end math formulas, like~$\pi r^2$.
-If you want your formula displayed on a line by itself, then double
-dollar signs
-$$
-  d(X,Y) =  \sum_{i,j} |x_{ij} - y_{ij}| 
-$$
-are your friend.
+Different ideas on dynamic information flow analysis has been published in previous papers ~\cite{harden}, ~\cite{basa}, ~\cite{bib3} where the main discussion was around a special type of value called {\it faceted value}. Faceted value approach was seen as one of the good way of achieving multi-process execution with the efficiency of single-process execution ~\cite{multiproc2} ~\cite{multiproc1} . By altering each one of the faceted values that contains both high level(confidential) and low level(public) information, a single process simulates the two processes of multi-process execution. The main advantage here being able to execute single execution that is the two mimicked executions collapses to a single one if both the values in a given faceted value are same and thus lessening the program overhead. More on faceted values can be see in the following chapters.
 
-In math formulas, text gets typeset as math symbols. To
-insert regular text in a math formula, you can use the \verb+\mbox+
-command. Here is an example of a displayed equation with text
-$$
-  {n\choose 26} 26!\;  26^{n-26} < 26^n \approx 2^{4.7n} \mbox{ is a pretty formula} .
-$$ 
-
-
-\subsection{Numbered Equations}
-
-One of the most useful features of \LaTeX\ is its symbolic cross-references.
-What this means is that you can give names to equations, figures, tables, citations, etc., and
-refer to those equations, figures, tables, citations, etc., by their names. Then when you \LaTeX\
-the document, the correct numbers will magically appear in place of the
-names. This is very convenient when you move things around or you insert or delete
-stuff. You should definitely use this feature as much as possible.
-
-In this section, we discuss numbered equations, Then in Chapter~\ref{chap:blah}
-we consider other examples of symbolic cross-referencing.
-Again, this is a feature you should use, since it will save
-you a lot of time in the long run.
-
-To typeset a displayed equation with a number, you can 
-use \verb+\begin{equation}+ to begin the equation, and \verb+\end{equation}+
-to end the equation. You also want to provide a label for the equation.
-For example,
-\begin{equation}\label{eq:swaps}
-  \sum_{i = 1}^{26} m_i \bigg( n - \sum_{j=1}^i m_j \bigg) 
-    = n^2 - \sum_{i = 1}^{26} m_i  \sum_{j=1}^i m_j = \sum_{i=1}^{25} \sum_{j=i+1}^{26} m_i m_j 
-\end{equation}
-gives us a numbered equation. 
-
-Note that labels can be used for
-just about anything that is numbered. Generally, to refer to a label,
-we use \verb+\ref{label}+, but for equations, you probably want to use
-\verb+\eref{label}+, since that will put parenthesis around the number.
-
-So, we can now refer to equation~\eref{eq:swaps} anywhere in the paper.
-Better yet, if we move, insert, or delete text, the numbering will still be correct.
-
-
-\subsection{Last Word on Equations}
-
-Again, typesetting equations is a big topic and we have only given the most basic
-of basics here. Just remember that almost anything is possible, and there
-are plenty of good resources available. 
-
-
-\section{Lists}
-
-Numbered lists are not difficult. Here is an example
-of a numbered list:
-\begin{enumerate}
-\item Let $\mbox{\tt score} = \infty$
-\item Construct an initial {\tt putativeKey} 
-\item Parse the ciphertext using {\tt putativeKey}
-\item Compute {\tt newScore} based on the resulting putative plaintext
-\item If $\mbox{\tt newScore} < \mbox{\tt score}$ then 
-let $\mbox{\tt key} = \mbox{\tt putativeKey}$ and $\mbox{\tt score} = \mbox{\tt newScore}$
-\item Modify {\tt key} to obtain a new {\tt putativeKey}
-\item Goto~3
-\end{enumerate}
-
-Bulleted lists are similar to numbered lists. Here is an example of a bulleted list:
-\begin{itemize}
-\item How can we determine an initial putative key?
-\item  How can we systematically modify the key?
-\item Given a putative key, how can we compute a score?
-\end{itemize}
-
-
-\section{Verbatim}
-
-To force \LaTeX\ to typeset exactly what you type, you might want to use the \verb+\verb+
-macro. Here is an example:
-\verb+four score    and seven+. Note that everything between the ``+'' signs
-is typeset as it appears. 
-
-If you happen to have a lot of verbatim text, you can use the verbatim environment,
-like this:
-
-\begin{verbatim}
-Four score
-and seven
-years
-ago.........
-\end{verbatim}
-
-Generally, verbatim should be used sparingly, if at all. But, since
-verbatim text has already appeared several times in this document, I thought it
-should be explained.
-
+There has been a couple of papers on faceted value approach  ~\cite{bib4} ~\cite{bib3} to dynamic information flow analysis. This paper concentrates on properly handling exceptions with faceted approach. Chapter 2 describes some background information on types of information flow analysis and also shows some of the JavaScript attacks. Chapter 3 gives an introduction on basic faceted evaluation, its semantics followed by some of the scenarios where there is a need to handle exceptions and a theoretical explanation of handling exceptions using the language constructs defined in earlier paper ~\cite{bib4}. Chapter 4 and 5 takes you through the implementation part of the project with some of the examples from real time scenarios and how the  new feature has been embedded into Mozilla Firefox browser. Chapter 6 compares the performance of faceted value implementation to that of Secure-Multi execution and chapter 7 gives the conclusion.

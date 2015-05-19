@@ -1,0 +1,74 @@
+\chapter{Performance Results}
+
+To understand the trade offs between both secure multi-execution and faceted values, I have compared performance tests between both sequential and concurrent secure multi-execution in Narcissus to that of faceted execution.
+
+\section{System Configuration} 
+All of my tests were performed on a Ubuntu 14.04 LTS system. The machine is running with 1.60GHz Intel Corei5-4200U processor with 4 cores and 6 GB of memory. 
+
+\section{Benchmarks}
+I have selected testcases from the SunSpider ~\cite{Webkit} benchmark suite.
+
+\section{Test Suits}
+\begin{itemize}
+
+\item{The \textbf{crypto-md5} test case deals with number crunching. This was modified to include 8 hashing operations with some inputs marked as confidential as per previous paper ~\cite{bib4}. Test cases involve 0 through 8 principals. Every principal marks an element as confidential for each case; additional hash inputs are marked as public. For example, test 1 hashes 1 confidential input and 7 public inputs. Test 8 hashes 8 confidential inputs and has no public inputs. if the data is marked as confidential then the public facet is set to an empty string.}
+\item{The \textbf{string-tagcloud} test case deals with parsing JavaScript Object Notation (JSON). This test is modified to create 8 distinct tag clouds from JSON-formatted strings. As in crypto-md5 tests, inputs from 0 to 8 are marked as confidential using a different principal. The public facet of this confidential data is initialized to a JSON string that represents an empty array.}
+\item{The \textbf{string-unpack-code} test cases makes use of 4 JavaScript libraries MochiKit, jQuery, Dojo, \& Prototype and extracts JavaScript code from them. This test case is modified to include 0-4 of the packed libraries and are marked as untrusted, and except for the Dojo library 3 others are passed to eval. This kind of setup might be useful for those that involves confidential information. During this testing the public facet is left as undefined.}
+
+\end{itemize}
+
+\begin{table}
+\begin{tabular}{ |p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{3cm}| }
+ \hline
+  	 & 	& \multicolumn{3}{|c|}{Time in seconds} \\ \cline{3-5}
+  	&	&\multicolumn{2}{|c|}{\footnotesize Secure Multi-Execution}& \\ \cline{3-4}
+  	 \footnotesize Test case & \footnotesize \# principals	&\footnotesize Sequential &\footnotesize Concurrent&	\footnotesize Faceted Execution\\
+ \hline
+    			&0    	&182		&186		&193\\
+ 			&1  		&332   	&211		&213\\
+ 			&2 		&619		&380		&253\\
+  			&3 		&1148	&699		&258\\
+ \footnotesize crypto-md5	&4  		&2414	&1285	&283\\
+ 			&5  		&4116   	&2184	&320\\
+ 			&6  		&*		&3982	&338\\
+ 			&7  		&*		&*		&345\\
+ 			&8  		&*		&*		&367\\
+ \hline
+    			&0    	&82		&84		&92\\
+ 			&1  		&153   	&141		&87\\
+ 			&2 		&287		&180		&79\\
+  			&3 		&536		&325		&71\\
+ \footnotesize string-tagcloud		&4  		&993		&578		&63\\
+ 			&5  		&1861   	&875		&55\\
+ 			&6  		&3270	&1945	&49\\
+ 			&7  		&*		&*		&42\\
+ 			&8  		&*		&*		&36\\
+ \hline
+    			&0    	&5.5		&5.5		&5.2\\
+ 			&1  		&10   	&6.4		&4.6\\
+ \footnotesize string-unpack-code	&2 		&19.8	&11.7	&4.6\\
+  			&3 		&39.7	&23.7	&4.6\\
+ 			&4  		&80	&48.4	&4.6\\
+ \hline
+ 	\multicolumn{5}{|c|}{Time in milli seconds} \\	
+ \hline
+    			&0    	&64		&67		&69\\
+ 			&1  		&93   	&104		&61\\
+ 			&2 		&161		&222		&41\\
+  			&3 		&295		&449		&41\\
+ \footnotesize Exception Handling	&4  		&576		&773		&42\\
+ 			&5  		&1129   	&890		&45\\
+ 			&6  		&2192	&1375	&42\\
+ 			&7  		&4441		&2900		&45\\
+ 			&8  		&9540		&5770		&49\\
+ \hline
+\end{tabular}
+\caption[Faceted Evaluation vs. Secure Multi-Execution]{Faceted Evaluation vs. Secure Multi-Execution } 
+\label{tab:results}
+\end{table}
+\section{Results}
+The results that are shown in Table ~\ref{tab:results} showcase the trade-offs between different approaches. The Sequential approach using Secure multi execution has better performance when there are no principals included. But once the number of principals grow, the performance time is almost doubled for each principal.
+
+Concurrent multi-execution is seen to be better performing when the number of principals are small. As the number of principals increase, the performance time is increased exponentially for concurrent execution. Faceted evaluation outperforms both concurrent and sequential multi-execution as the number of principals increase. 
+
+There are some differences observed between string-tagcloud and crypto-md5 evaluations with faceted values. The performance timings are pretty constant and decrease a bit for the string-tagcloud test. This is observed as it depends on the choice of public facets, which sometimes tend to require lesser computations. For example, parsing a JSON string with empty size is faster than parsing a huge JSON string cloud. For the other test case, crypto-md5, we can see faceted evaluation is slowed down considerably with the introduction of each principal.

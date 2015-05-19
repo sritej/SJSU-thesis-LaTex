@@ -1,0 +1,117 @@
+\chapter{Implementation of faceted exceptions with JavaScript}
+Having seen some of the semantics to handle exceptions(Figure 15 and Figure 16) using faceted values, we now go ahead to see some of the code samples and observations using the same. We have developed few of the code samples and executed them from command line. consider the following code sample Figure ~\ref{fig:JSExcepcode}
+
+\begin{figure}
+  \centering
+\begin{lstlisting}[language=JavaScript] 
+	var p = 0;
+	var cc = cloak (123456,"h") || 0;
+	try {
+		
+		if (cc===0)
+		{
+			throw "error";
+		}
+		p=2;
+	}
+	catch (e) {
+		p=1;
+	}
+	print(cc);
+	print(p);
+	...
+	...
+	
+\end{lstlisting}
+    \caption[Sample code that handles exceptions.]
+    {Sample code that handles exceptions.\\ cc is a faceted value that stores confidential information like credit card details.}
+    \label{fig:JSExcepcode}
+\end{figure}
+
+As seen in the line \# 1, a variable p is assigned a value 0 by default. In line \# 2, a faceted value is created using the function "cloak". The function cloak is given with two parameters, the first one being the value and the second one being the principle. Principle states what kind of information this variable carries. Principle can assume any value. Its basically a string or just a character that classifies the associated value. For example, to classify a highly secured value/information we use "h", stating that this value can only be viewed by authorized users. we can see the structure of cc as mentioned below.
+$$
+({label:\{value:"h",\ bar:(void\ 0)\},\ authorized:123456,\ unauthorized:0})
+$$
+The variable cc, which contains the faceted value, is checked for authorization and an exception is thrown if some unauthorized value is observed. As described in the earlier chapters, the "if" block is executed twice as per the multi-process execution principles, once for the authorized view and once for the unauthorized view. The if block sees the value of cc as "123456" for the authorized view and "0" for the another. As per the code, when cc is "0" there is an exception being thrown and the program counter p is being updated to 1. If there is normal flow in the program with out any exception, the value of the program counter p will be seen as 2. Thus, there is no abrupt end in the program and the rest of the steps are well executed after the exception normally. Just that the value of p will be differ. This multi-process execution will only be initiated for the if block and then p is converted to a faceted value and a single execution is continued there on until the program flow encounters another conditional block or statement. The value of p can be seen as below.
+$$
+({label:\{value:"h",\ bar:false\},\ authorized:2,\ unauthorized:1})
+$$
+
+\section{Possible attack with Exceptions}
+Consider the code sample ~\ref{fig:JSInfoLeak}. For every bit set in the binary representation of a Credit 
+\begin{figure}
+  \centering
+\begin{lstlisting}[language=JavaScript] 
+	var creditCard = cloak (5,"h") || 0;
+	setTimeout(function(){ leakBit(0); }, 2000);
+	
+	var leakBit = function (bitPos) {
+			setTimeout(function(){ 
+						leakBit(bitPos+1); 
+						}, 2000);
+			var bitSet = creditCard & 
+							Math.pow(2,bitPos);
+			if(bitSet === 0) {
+				throw "error";
+			}
+			sendInfoToEvilServer(
+			"www.evil.com/hack.html?bitSet="+bitPos);
+		}
+			
+\end{lstlisting}
+    \caption[Information leak using exceptions.]
+    {Information leak using exceptions.}
+    \label{fig:JSInfoLeak}
+\end{figure}
+Card number, the code mentioned leaks a bit every time when there is no exception and this tracks all the bit positions that are set. This code crashes with previous implementation of faceted values whenever there is an exception raised. setTimeout initiates a new thread which calls the function leakBit for every 2 seconds. Function leakBit does a \textquotesingle bitwise and\textquotesingle (\&) operation between the tracked number (Credit Card number) and a number which is mentioned in the power of 2. Every time when the function leakBit is called, the parameter is incremented and passed to it. This way it is easy to track which bit of the confidential information is set and send it to the evil server. For all the threads which see the bitSet variable as 1, the information is sent to the evil server and all the threads which see the bitSet variable as 0 crashes throwing an exception which is not tracked and thus no information is sent. As there is no exception scenario handled properly for faceted execution, this code does not restrict the intruder from gaining access to the confidential information.
+
+Consider the code sample ~\ref{fig:JSInfoNoLeak}. Exceptions are properly handled and there is no program 
+\begin{figure}
+  \centering
+\begin{lstlisting}[language=JavaScript] 
+	var creditCard = cloak (5,"h") || 0;
+	setTimeout(function(){ leakBit(0); }, 2000);
+	
+	var leakBit = function (bitPos) {
+			setTimeout(function(){ 
+						leakBit(bitPos+1); 
+						}, 2000);
+			var bitSet = creditCard & 
+							Math.pow(2,bitPos);
+			try{
+			if(bitSet === 0) {
+				throw "error";
+			}
+			}catch(e) {
+				bitSet=0;
+			}
+			sendInfoToEvilServer(
+			"www.evil.com/hack.html?bitSet="+bitPos);
+		}
+			
+\end{lstlisting}
+    \caption[Restricting Information leak.]
+    {Restricting Information leak.}
+    \label{fig:JSInfoNoLeak}
+\end{figure}
+crash. The information will still be sent the evil server for all the threads which see the bitSet variable as either 0 or 1. But only the public information will be sent every time. We mark the public information as "0" at line \# 15 always and is assigned as a public value. Thus the attacker only sees 0's every time. This prevents the attacker to get hold of any confidential information.
+
+\section{Embedding the feature into Firefox}
+The ideas on faceted evaluation have been included into Firefox through the Narcissus JavaScript engine ~\cite{Eich} and Zaphod Firefox plugin ~\cite{Zaphod} To handle the additional complexities of JavaScript, ZaphodFacets implementation ~\cite{ZaphodFacetes} extends the faceted semantics. This paper extends the basic implementation 
+without exceptions that was presented in ~\cite{bib4} to provide exception handling support.
+
+Among the examples given, I have modified the method call to "getView()" to send the principle as a string variable and hence return the exact value for the view. This plugin also handles exception scenarios as described above in the codes sample. The function "cloak(v,k)" produces a faceted value with v being the authorized value and null being the unauthorized value. the unauthorized value can be changed by performing a logical or operation between the faceted value and the desired value for the view (unauthorized).
+$$
+var\ x\ =\ cloak("Hello","h")\ ||\ "Hi";
+$$
+The above statement sets x to 
+$$
+<k\ ?\ "Hello"\ :\ "Hi">
+$$
+Cloak is mainly used during an input given to the system. 
+
+Once Zaphod plugin is installed into the browser, we can choose to execute JavaScript either using normal Spider Monkey library or by using Narcissus library. We can see a button on the status bar to toggle between the two engines. Narcissus library has the capacity to deal with faceted values and provide a smooth flow when an exception occurs in any single view. The code that is evaluated on narcissus have different permissions. 
+
+\section{Identifying private data} 
+The major challenge here lies in identifying the private data and if any exception is raised, how does the view needs to react as it should see no difference in the functionality. Generally the policy published in the paper ~\cite{bib4} describes that all the password fields are private and also any form element with a class of secure or confidential is also treated as private data. I, in this paper will be going by the same set of rules to identify private data and thus properly handle exceptions that arise due to improper assignments within the control flow. Similarly we extend the same techniques to identify the untrusted scripts.
+

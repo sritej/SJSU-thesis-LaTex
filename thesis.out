@@ -1,0 +1,30 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Security Challenges}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Dynamic Information Flow}{chapter.1}% 3
+\BOOKMARK [0][-]{chapter.2}{Background}{}% 4
+\BOOKMARK [1][-]{section.2.1}{Information Flow Analysis for JavaScript}{chapter.2}% 5
+\BOOKMARK [2][-]{subsection.2.1.1}{Explicit Flows}{section.2.1}% 6
+\BOOKMARK [2][-]{subsection.2.1.2}{Implicit Flows}{section.2.1}% 7
+\BOOKMARK [2][-]{subsection.2.1.3}{Other existing information flow analysis}{section.2.1}% 8
+\BOOKMARK [1][-]{section.2.2}{Faceted Evaluation Overview}{chapter.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.1}{Exceptions Overview}{section.2.2}% 10
+\BOOKMARK [1][-]{section.2.3}{JavaScript Attacks}{chapter.2}% 11
+\BOOKMARK [2][-]{subsection.2.3.1}{Different types of XSS attacks}{section.2.3}% 12
+\BOOKMARK [2][-]{subsection.2.3.2}{Clickjacking}{section.2.3}% 13
+\BOOKMARK [0][-]{chapter.3}{Multi-Faceted Evaluation}{}% 14
+\BOOKMARK [1][-]{section.3.1}{Programming Constructs with Facets}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.2}{Faceted Evaluation with Exceptions}{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.3}{Faceted Exceptions}{chapter.3}% 17
+\BOOKMARK [0][-]{chapter.4}{Implementation of faceted exceptions with JavaScript}{}% 18
+\BOOKMARK [1][-]{section.4.1}{Possible attack with Exceptions}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.2}{Embedding the feature into Firefox}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.3}{Identifying private data}{chapter.4}% 21
+\BOOKMARK [0][-]{chapter.5}{Firefox addon development}{}% 22
+\BOOKMARK [1][-]{section.5.1}{History}{chapter.5}% 23
+\BOOKMARK [1][-]{section.5.2}{Why Firefox ?}{chapter.5}% 24
+\BOOKMARK [0][-]{chapter.6}{Performance Results}{}% 25
+\BOOKMARK [1][-]{section.6.1}{System Configuration}{chapter.6}% 26
+\BOOKMARK [1][-]{section.6.2}{Benchmarks}{chapter.6}% 27
+\BOOKMARK [1][-]{section.6.3}{Test Suits}{chapter.6}% 28
+\BOOKMARK [1][-]{section.6.4}{Results}{chapter.6}% 29
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 30

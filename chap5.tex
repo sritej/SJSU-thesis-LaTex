@@ -1,0 +1,15 @@
+\chapter{Firefox addon development} 
+An add-on is something that can be associated with an existing application or object to improve its performance or to enhance security ~\cite{addon}. In software terms this can be referred to as plug-in a browser extension, or an add-on. In general, add-ons are used to block web based ads, detect malware, download video content from a web-page, use different themes, enables internet content to be downloaded and be played on different web players like flash, quicktime and many a times supports online games.
+
+\section{History}
+Microsoft's Internet explorer was the first one to support these browser extensions/add-ons starting from its version 5 in 1999 ~\cite{ie5}. Later since 2004, ~\cite{firefox} Mozilla started providing support for extensions within its own browser Firefox. Then followed by Opera, Chrome, and Safari browsers in 2009 and 2010 ~\cite{opera},~\cite{chrome},~\cite{safari},. The mode of development and the language used differs from browser to browser and thus the extensions developed are not cross platform. All these extensions can be obtained from the respective browser stores for Mozilla ~\cite{MExtension}, for Chrome ~\cite{CExtension}, for Safari ~\cite{SExtension}. 
+
+
+\section{Why Firefox ?}
+Firefox provides an extensive API base to develop add-ons. Add-ons for Firefox are more powerful and have access to all of the process that a Firefox browser starts or has access to. As this paper deals with security, it is much more easier from the developer perspective with more stream lined API calls to add security features into a Firefox based add-on when compared to Chrome extensions. A Firefox add-on can gain access to external resources in a much easier way as compared to Chrome extensions. Chrome is limited in-terms of trusting an extension, thus complete access is not given to a Chrome extension and hence limiting us to only few areas.	
+
+There are 3 different forms of Extensions that are in use now-a-days ~\cite{FirefoxExtension}\\
+1) Add-ons SDK extensions (also known as Jetpacks)\\
+2) Bootstrapped extensions \\
+3) Traditional extensions \\
+As a part of this paper, I worked on an existing traditional extension called Zaphod ~\cite{Zaphod}. Traditional, classic, or XUL extensions are more powerful, but more complicated to build and require a restart to install ~\cite{FirefoxExtensionBuilding}. Due to its power to access more browser features, we chose this kind of development in contrast to boostrapped or SDK based implementations.

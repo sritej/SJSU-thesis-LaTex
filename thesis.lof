@@ -1,0 +1,26 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 1}{\ignorespaces Information Flow}}{6}{figure.caption.8}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 2}{\ignorespaces Execution at L security level.}}{8}{figure.caption.9}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 3}{\ignorespaces Execution at H security level.}}{8}{figure.caption.10}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 4}{\ignorespaces The source language $\lambda _{facet}$.}}{10}{figure.caption.12}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 5}{\ignorespaces Faceted evaluation - control flow.}}{10}{figure.caption.13}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 6}{\ignorespaces Faceted exception - control flow.}}{11}{figure.caption.14}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 7}{\ignorespaces Reflected XSS}}{12}{figure.caption.15}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 8}{\ignorespaces Persistent XSS}}{13}{figure.caption.16}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 9}{\ignorespaces DOM based XSS attack 1}}{13}{figure.caption.17}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 10}{\ignorespaces DOM based XSS attack 2}}{14}{figure.caption.18}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 11}{\ignorespaces DOM based XSS attack 2}}{14}{figure.caption.19}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 12}{\ignorespaces Standard Semantics.}}{16}{figure.caption.20}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 13}{\ignorespaces Extended Semantics with faceted values.}}{18}{figure.caption.21}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 14}{\ignorespaces The Standard semantics to handle exceptions.}}{19}{figure.caption.22}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 15}{\ignorespaces Core rules for Faceted Evaluation with Exception Handling.}}{20}{figure.caption.23}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 16}{\ignorespaces Faceted Evaluation Rules for Application and Exceptions.}}{21}{figure.caption.24}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 17}{\ignorespaces Sample code that handles exceptions.}}{24}{figure.caption.25}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 18}{\ignorespaces Information leak using exceptions.}}{25}{figure.caption.26}
+\contentsline {figure}{\numberline {\global \advance \c@totalfigurecount 1\relax 19}{\ignorespaces Restricting Information leak.}}{26}{figure.caption.27}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
